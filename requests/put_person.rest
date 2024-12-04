@@ -1,0 +1,7 @@
+PUT http://localhost:3002/api/persons/67345ff2f6dc47bcf8883a6a
+Content-Type: application/json
+
+{
+    "name": "Liisa Marttinen",
+    "number": "040-243563"
+}
