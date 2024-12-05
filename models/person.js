@@ -13,10 +13,23 @@ mongoose
   });
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    minlength: [3, "must be at least 3 characters long"],
+    required: [true, "Name is required"],
+  },
+  number: {
+    type: String,
+    required: [true, "Number is required"],
+    validate: {
+      validator: function (value) {
+        return /^\d{2,3}-\d{5,}$/.test(value);
+      },
+      message: (props) =>
+        `${props.value}  needs to be 8 characters and  in the format XX-XXXXX or XXX-XXXXX`,
+    },
+  },
 });
-
 personSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
